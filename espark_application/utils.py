@@ -3,10 +3,10 @@ import pandas as pd
 
 def create_list(csvFile):
     """
-    Returns a list of lists from a CSV file
+    Returns a list of lists from a CSV file.
 
-    The function iterates though the csv object and appends each row to a list.
-    If the csv_object is not iterable then a "Not a csv" statement is returned.
+    The function iterates through the csv object and appends each row to a list.
+    If the csv_object is not iterable then a "Not a csv" string statement is returned.
     """
     csv_object = csv.reader(csvFile)
     list_of_lists = []
@@ -20,11 +20,11 @@ def create_list(csvFile):
 
 def create_domain_dict(domain_list):
     """
-    Returns a dictionary with grades as keys and lists as values that contain the grade's domain order
+    Returns a dictionary with grades as keys and lists as values that contain the grade's domain order.
 
     The function iterates through the domain list and converts grades to integers
     and assigns a list of ordered domains to the correct grade level key.
-    Incase of an Excel CSV, empty strings are removed.
+    Incase of an Excel CSV, empty strings are checked for and removed.
 
     Example
     -------
@@ -121,17 +121,18 @@ def create_learning_path(order, student_dict):
     and then deleting this key, value pair.
 
     The basic process of this function to create the correct ordering is as follows:
-        - Obtain the students lowest grade level and the corresponding domain elements within this min level.
-          Have these two components assigned to separate variables.
+        - Obtain the students lowest grade level and the corresponding domain elements within this minimum level.
+          Have these two components assigned to separate variables, current_grade_level and domain_check.
         - Next it creates a while loop. Inside this while loop  the function begins to iterate through the 
           order dictionary by starting at order[current_grade_level], where current_grade_level is the minimum grade 
           level for a student. As this iteration occurs, the function checks to see if the students testing level matches 
           an element in the order. If it does, append this lesson to the student lesson plan list.
-        - Following this we increment our grade level and repeat the process.
+        - Following this we increment our grade level and repeat the process making sure it all captures domains 
+          above the previous.
         - The while loop is stopped when when the student list has reached a length of 5
           or if current_grade_level has incremented past the max grade in our order dictionary. 
           current_grade_level will surpass the max grade in our order dictionary when 
-          a student 
+          a student tested well and has no content available to them.
     """
     student = []
     name = student_dict['Student Name'][0]
