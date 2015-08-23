@@ -132,7 +132,7 @@ def create_learning_path(order, student_dict):
         - The while loop is stopped when when the student list has reached a length of 5
           or if current_grade_level has incremented past the max grade in our order dictionary. 
           current_grade_level will surpass the max grade in our order dictionary when 
-          a student tested well and has is only eligible for 4 assignments instead of 5.
+          a student tested well and has is only eligible for less than 5 assignments.
     """
     student = []
     name = student_dict['Student Name'][0]
