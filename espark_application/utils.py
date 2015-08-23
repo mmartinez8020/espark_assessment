@@ -6,7 +6,7 @@ def create_list(csvFile):
     Returns a list of lists from a CSV file
 
     The function iterates though the csv object and appends each row to a list.
-    If the csv_object is not iterable then a string "Not a csv" string is returned
+    If the csv_object is not iterable then a "Not a csv" statement is returned.
     """
     csv_object = csv.reader(csvFile)
     list_of_lists = []
@@ -19,7 +19,7 @@ def create_list(csvFile):
 
 def create_domain_dict(domain_list):
     """
-    Returns a dictionary with grades as keys and lists as values that contain the domain order
+    Returns a dictionary with grades as keys and lists as values that contain the grade's domain order
 
     The function iterates through the domain list and converts grades to integers
     and assigns a list of ordered domains to the correct grade level key.
@@ -47,10 +47,10 @@ def create_domain_dict(domain_list):
 
 def update_values(student_list):
     """
-    Returns a new list where appropriate strings have been converted to integers
+    Returns a new list where eligible strings have been converted to integers
 
     The function iterates through student lists and checks for grade levels and converts them to 
-    integers.
+    integers. "K" is converted to 0.
 
     Example
     -------
@@ -74,13 +74,13 @@ def update_values(student_list):
 
 def student_setup(students):
     """
-    Returns list of dictionaries corresponding to each student. The key to each
+    Returns a list of dictionaries corresponding to each student. The key to each
     dictionary corresponds to a grade level and the values are a list corresponding
-    to the students grade domain level.
+    to the students required domain assignments per grade level.
 
     The function takes the list of students and iterates through the students.
-    During iteration a dictionary between their current grade, domain level within
-    that grade level. Each dictionary is appended to a list called dict_students. 
+    During iteration a dictionary is created with their grade levels as keys, domain levels within
+    that grade level as lists. Each dictionary is appended to a list called dict_students. 
     Example
     -------
     student_results = [
@@ -100,6 +100,7 @@ def student_setup(students):
     for student in students:
         d = {}
         for i,j in zip(student, labels):
+            #Switches 'Student Name': ['Student 1'] to ['Student 1'] : 'Student Name'
             if not str(i).isdigit() and len(i) > 1:
                 name = j
                 j = i
@@ -115,20 +116,22 @@ def create_learning_path(order, student_dict):
     """
     Returns correct learning path given a student and a domain order.
 
-    This function starts grabbing the students name from the student_dict,
+    This function starts by grabbing the students name from the student_dict,
     reassigning it to the another variables (for use after ordering is complete), 
     and then deleting this key, value pair.
 
     The basic process of this function to create the correct ordering is as follows:
-        - Obtain the students lowest grade level and the corresponding domain elements.
-          Have these two components assigned to variables.
-        - Next it creates a while loop. Inside this while loop begin to iterate through the 
-          order dictionary by starting at order[current_grade_level]. As this iteration occurs,
-          check to see if the students testing level matches an element in the order. If it dictionaries 
-          append this lesson to the student list.
+        - Obtain the students lowest grade level and the corresponding domain elements within this min level.
+          Have these two components assigned to separate variables.
+        - Next it creates a while loop. Inside this while loop  the function begins to iterate through the 
+          order dictionary by starting at order[current_grade_level], where current_grade_level is the minimum grade 
+          level for a student. As this iteration occurs, the function checks to see if the students testing level matches 
+          an element in the order. If it does, append this lesson to the student lesson plan list.
         - Following this we increment our grade level and repeat the process.
         - The while loop is stopped when when the student list has reached a length of 5
-          or if current_grade_level has incremented past the max grade in our order dictionary.  
+          or if current_grade_level has incremented past the max grade in our order dictionary. 
+          current_grade_level will surpass the max grade in our order dictionary when 
+          a student 
     """
     student = []
     name = student_dict['Student Name'][0]
@@ -151,6 +154,11 @@ def create_learning_path(order, student_dict):
         
 
 def create_html_table(data):
+    """
+    Returns an html table with student lesson plans
+
+    This function leverages pandas to transform a list of lists to an html table.
+    """
     df_student = pd.DataFrame(data, columns= ["Names"] + [assign for assign in range(1,len(data[0]))])
     html_table = df_student.to_html(classes=["table", "table-striped", "table-condensed","table-nonfluid"], index=False)        
     return html_table
