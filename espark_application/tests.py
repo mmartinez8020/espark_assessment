@@ -20,11 +20,11 @@ class UtilityFunctionsTestCase(TestCase):
         self.assertEqual(len(test_list), 9)
         #Check if function returns a list
         self.assertEqual(isinstance(test_list, list), True)
-        #Check if function returns length of 0 is CSV is blank
+        #Check if function returns length of 0 if CSV is blank
         self.assertEqual(len(blank), 0)
         #Check if function returns a list
         self.assertEqual(isinstance(blank, list), True)
-        #Check is correct string is returned when file is not a CSV
+        #Check if correct string is returned when file is not a CSV
         self.assertEqual(pdf_file, 'Not a csv')
 
     def test_create_domain_dict(self):
@@ -34,11 +34,11 @@ class UtilityFunctionsTestCase(TestCase):
         ]
         domain_result = create_domain_dict(domain)
         
-        #Check if returns a dictionary
+        #Check if function returns a dictionary
         self.assertEqual(isinstance(domain_result, dict), True)
-        #Check if returns correcy key,value
+        #Check if function returns correcy key,value
         self.assertEqual(domain_result[2], ["R"])
-        #Check if returns correct length of returned value
+        #Check if function returns correct length of returned value
         self.assertEqual(len(domain_result), 3)
 
     def test_update_values(self):    
@@ -50,7 +50,7 @@ class UtilityFunctionsTestCase(TestCase):
         ]
         update_student_grades = update_values(student_grades)
         
-        #Check is output is a list
+        #Check if function output is a list
         self.assertEqual(isinstance(update_student_grades, list), True)
         #Check if all eligible items were converted to integers
         self.assertEqual(all(isinstance(item, int) for item in update_student_grades[3][1:]), True)
