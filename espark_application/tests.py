@@ -83,10 +83,4 @@ class UtilityFunctionsTestCase(TestCase):
         #Check to see that all student results are in solution set 
         self.assertEqual(all(create_learning_path(domain_order_dict, student) in solution_list for student in student_list_dict), True)
 
-
-
-
-
-        
-
         
