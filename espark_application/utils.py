@@ -120,19 +120,19 @@ def create_learning_path(order, student_dict):
     reassigning it to the another variables (for use after ordering is complete), 
     and then deleting this key, value pair.
 
-    The basic process of this function to create the correct ordering is as follows:
-        - Obtain the students lowest grade level and the corresponding domain elements within this minimum level.
+    The basic process of this function in creating the correct ordering is the following:
+        - Obtain the student's lowest grade level and the corresponding domain elements within this minimum level.
           Have these two components assigned to separate variables, current_grade_level and domain_check.
-        - Next it creates a while loop. Inside this while loop  the function begins to iterate through the 
+        - Next it creates a while loop. Inside this while loop the function begins to iterate through the 
           order dictionary by starting at order[current_grade_level], where current_grade_level is the minimum grade 
           level for a student. As this iteration occurs, the function checks to see if the students testing level matches 
           an element in the order. If it does, append this lesson to the student lesson plan list.
-        - Following this we increment our grade level and repeat the process making sure it all captures domains 
+        - Following this we increment our grade level and repeat the process making sure it all captures similar domains 
           above the previous.
         - The while loop is stopped when when the student list has reached a length of 5
           or if current_grade_level has incremented past the max grade in our order dictionary. 
           current_grade_level will surpass the max grade in our order dictionary when 
-          a student tested well and has no content available to them.
+          a student tested well and has is only eligible for 4 assignments instead of 5.
     """
     student = []
     name = student_dict['Student Name'][0]
