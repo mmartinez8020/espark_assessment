@@ -10,15 +10,17 @@ def index(request):
     student_test = open(os.path.join(os.path.dirname(__file__), 'csv/student_tests.csv')) 
     domain_test = open(os.path.join(os.path.dirname(__file__), 'csv/domain_order_test.csv'),'rU') 
     test_file = open(os.path.join(os.path.dirname(__file__), 'csv/test_file.csv'),'rU') 
-    print student_setup(update_values(create_list(test_file)))
+    
     student_test = create_list(student_test)
     domain_order = create_list(domain_order)
     domain_order = create_domain_dict(domain_order)
     student_list = student_setup(update_values(student_test))
     final = []
+    print student_list
     for student in student_list:
         student_order = create_learning_path(domain_order, student)
         final.append(student_order)
+     
     html_table = create_html_table(final)
     context = {'myhtml': html_table}
     return render(request, 'index.html',context)

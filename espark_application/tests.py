@@ -1,5 +1,5 @@
 from django.test import TestCase
-from utils import create_list, create_domain_dict,student_setup, update_values,real_function, create_html_table
+from utils import create_list, create_domain_dict,student_setup, update_values, create_learning_path, create_html_table
 import os
 import csv
 import pandas as pd
@@ -7,17 +7,24 @@ import pandas as pd
 test_csv = open(os.path.join(os.path.dirname(__file__), 'csv/test_file.csv'),'rU') 
 blank_csv = open(os.path.join(os.path.dirname(__file__), 'csv/blank_csv.csv'),'rU') 
 pdf = open(os.path.join(os.path.dirname(__file__), 'csv/testpdf.pdf')) 
-# domain_test = open(os.path.join(os.path.dirname(__file__), 'csv/domain_order_test.csv')) 
+domain_order = open(os.path.join(os.path.dirname(__file__), 'csv/domain_order.csv')) 
+student_test = open(os.path.join(os.path.dirname(__file__), 'csv/student_tests.csv')) 
+sample_solution = open(os.path.join(os.path.dirname(__file__), 'csv/sample_solution.csv')) 
 
 class UtilityFunctionsTestCase(TestCase):
     def test_create_list(self):
         test_list = create_list(test_csv)
         blank = create_list(blank_csv)
         pdf_file = create_list(pdf)
+        #Check if function returns correct length
         self.assertEqual(len(test_list), 9)
+        #Check if function returns a list
         self.assertEqual(isinstance(test_list, list), True)
+        #Check if function returns length of 0 is CSV is blank
         self.assertEqual(len(blank), 0)
+        #Check if function returns a list
         self.assertEqual(isinstance(blank, list), True)
+        #Check is correct string is returned when file is not a CSV
         self.assertEqual(pdf_file, 'Not a csv')
 
     def test_create_domain_dict(self):
@@ -63,6 +70,17 @@ class UtilityFunctionsTestCase(TestCase):
         self.assertEqual(isinstance(list_of_students, list), True)
         #Check if all items are dictionaries
         self.assertEqual(all(isinstance(student_dictionary, dict) for student_dictionary in list_of_students), True)
+
+    def test_create_learning_path(self):
+        solution_list = create_list(sample_solution)
+        student_tests = create_list(student_test)
+        domain_orders = create_list(domain_order)
+        domain_order_dict = create_domain_dict(domain_orders)
+        student_list_dict = student_setup(update_values(student_tests))
+        #Check to see that all student results are in solution set 
+        self.assertEqual(all(create_learning_path(domain_order_dict, student) in solution_list for student in student_list_dict), True)
+
+
 
 
 
