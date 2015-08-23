@@ -2,6 +2,12 @@ import csv
 import pandas as pd
 
 def create_list(csvFile):
+    """
+    Returns a list of lists from a CSV file
+
+    The function iterates though the csv object and appends each row to a list.
+    If the csv_object is not iterable then a string "Not a csv" string is returned
+    """
     csv_object = csv.reader(csvFile)
     list_of_lists = []
     try:
@@ -12,7 +18,22 @@ def create_list(csvFile):
     return list_of_lists    
 
 def create_domain_dict(domain_list):
+    """
+    Returns a dictionary with grades as keys and lists as values that contain the domain order
+
+    The function iterates through the domain list and converts grades to integers
+    and assigns a list of ordered domains to the correct grade level key.
+    Incase of an Excel CSV, empty strings are removed.
+
+    Example
+    ----------
+
+    >>> domain = [["K", "BL","HM","RR"], ["1","BL","HM","RR","L"],["2","R"]]
+    
+    {0: ['BL', 'HM', 'RR'], 1: ['BL', 'HM', 'RR', 'L'], 2: ['R']}
+    """
     grades = {}
+  
     for grade in domain_list:
         try:
             key = int(grade[0])
@@ -24,6 +45,12 @@ def create_domain_dict(domain_list):
     return grades 
 
 def update_values(student_list):
+    """
+    Returns a new list where appropriate strings have been converted to integers
+
+    The function iterates through student lists and checks for grade levels and converts them to 
+    integers.
+    """
     for student in student_list:
         for index, item in enumerate(student):
             if item.isdigit():
