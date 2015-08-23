@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+     <title>eSpark</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/styles.css" %}">
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  </head>
+  <body>
+  {% load staticfiles %}
+    <div id="navbar">
+    <img id="logo" src="{% static "img/espark-header-logo.png" %}">
+    </div>
+    <form class="form" method="POST" action="/" enctype="multipart/form-data">
+      {% csrf_token %}
+      Student Tests: <input class='csvinputs studenttests' type="file" name="studenttests" />
+    </br>
+      Domain Order: <input class='csvinputs domainorder' type="file" name="domainorder" />
+    </br>
+      <input type="submit">
+    </form>
+
+    {% autoescape off %}{{ myhtml }}{% endautoescape %}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script src="{% static "js/client.js" %}"></script>
+  <script src="{% static "js/jquery.form.min.js" %}"></script>
+  </body>
+</html>
