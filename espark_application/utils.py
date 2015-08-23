@@ -37,8 +37,6 @@ def student_setup(students):
     dict_students = []
     for student in students:
         d = {}
-        print student
-        print labels
         for i,j in zip(student, labels):
             if not str(i).isdigit() and len(i) > 1:
                 name = j

@@ -11,15 +11,36 @@ def index(request):
     student_test = create_list(student_test)
     domain_order = create_list(domain_order)
     domain_order = create_domain_dict(domain_order)
-    print student_test
     student_list = student_setup(update_values(student_test))
     final = []
     for student in student_list:
-        
         student_order = real_function(domain_order, student)
         final.append(student_order)
+    print final            
     html_table = create_html_table(final)
     context = {'myhtml': html_table}
-    return render(request, 'index.html', context)
+    print html_table
+    return render(request, 'index.html',context)
+    
     
 
+
+
+    # if request.method == 'POST':
+    #     domain_order = request.FILES['domainorder']
+    #     student_test = request.FILES['studenttests']
+    #     student_test = create_list(student_test)
+    #     domain_order = create_list(domain_order)
+    #     domain_order = create_domain_dict(domain_order)
+    #     student_list = student_setup(update_values(student_test))
+    #     final = []
+    #     for student in student_list:
+    #         student_order = real_function(domain_order, student)
+    #         final.append(student_order)
+    #     print final            
+    #     html_table = create_html_table(final)
+    #     context = {'myhtml': html_table}
+    #     print html_table
+    #     return render(request, 'index.html',context)
+    # return render(request, 'index.html')
+    
