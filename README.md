@@ -1,5 +1,3 @@
-# espark_assessment
-*eSpark Technical Assessment*
+# eSpark Technical Assessment
 
-Used Django for the backend and jQuery/Bootstrap for the fron-end. Heart of the application can be found in views.py and utils.py 
-within espark_application directory.
+Used Django for the backend and jQuery/Bootstrap for the fron-end. Heart of the application can be found in views.py and utils.py within espark_application directory.
