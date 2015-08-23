@@ -49,7 +49,7 @@ class UtilityFunctionsTestCase(TestCase):
           ['Mark Martinez', 'K', 'K', 'K', '2']
         ]
         update_student_grades = update_values(student_grades)
-        print update_student_grades
+        
         #Check is output is a list
         self.assertEqual(isinstance(update_student_grades, list), True)
         #Check if all eligible items were converted to integers
@@ -59,7 +59,7 @@ class UtilityFunctionsTestCase(TestCase):
         student_results = [
           ['Student Name', 'Domain1', 'Domain2', 'Domain3', 'Domain4'], 
           ['Student 1', 2, 3, 0, 3], 
-          ['Student 2', 3, 1, 1, 1], 
+          ['Student 2', 3, 1, 1, 1] 
           ['Student 3', 0, 0, 1, 2], 
           ['Student 4', 2, 4, 4, 4], 
           ['Student 5', 2, 3, 0, 1], 
@@ -68,6 +68,7 @@ class UtilityFunctionsTestCase(TestCase):
           ['Student 8', 0, 0, 4, 5]
         ]
         list_of_students = student_setup(student_results)
+        print list_of_students
         #Check if output is a list
         self.assertEqual(isinstance(list_of_students, list), True)
         #Check if all items are dictionaries

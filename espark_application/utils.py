@@ -26,7 +26,7 @@ def create_domain_dict(domain_list):
     Incase of an Excel CSV, empty strings are removed.
 
     Example
-    ----------
+    -------
 
     domain = [["K", "BL", "HM", "RR"], ["1", "BL", "HM", "RR", "L"],["2", "R"]]
     
@@ -52,6 +52,8 @@ def update_values(student_list):
     The function iterates through student lists and checks for grade levels and converts them to 
     integers.
 
+    Example
+    -------
     student_grades = [
           ['Student Name', 'RF', 'RL', 'RI', 'L'], 
           ['Alex Trebek', '2', '3', 'K', '3'], 
@@ -75,6 +77,22 @@ def student_setup(students):
     Returns list of dictionaries corresponding to each student. The key to each
     dictionary corresponds to a grade level and the values are a list corresponding
     to the students grade domain level.
+
+    The function takes the list of students and iterates through the students.
+    During iteration a dictionary between their current grade, domain level within
+    that grade level. Each dictionary is appended to a list called dict_students. 
+    Example
+    -------
+    student_results = [
+          ['Student Name', 'Domain1', 'Domain2', 'Domain3', 'Domain4'], 
+          ['Student 1', 2, 3, 0, 3], 
+          ['Student 2', 3, 1, 1, 1], 
+    ]
+
+    >>> student_setup(student_results)
+    [{0: ['Domain3'], 'Student Name': ['Student 1'], 3: ['Domain2', 'Domain4'], 2: ['Domain1']}, 
+    {1: ['Domain2', 'Domain3', 'Domain4'], 'Student Name': ['Student 2'], 3: ['Domain1']}]
+
     """
     labels = students[0]
     del students[0]
@@ -94,6 +112,24 @@ def student_setup(students):
 
 
 def create_learning_path(order, student_dict):
+    """
+    Returns correct learning path given a student and a domain order.
+
+    This function starts grabbing the students name from the student_dict,
+    reassigning it to the another variables (for use after ordering is complete), 
+    and then deleting this key, value pair.
+
+    The basic process of this function to create the correct ordering is as follows:
+        - Obtain the students lowest grade level and the corresponding domain elements.
+          Have these two components assigned to variables.
+        - Next it creates a while loop. Inside this while loop begin to iterate through the 
+          order dictionary by starting at order[current_grade_level]. As this iteration occurs,
+          check to see if the students testing level matches an element in the order. If it dictionaries 
+          append this lesson to the student list.
+        - Following this we increment our grade level and repeat the process.
+        - The while loop is stopped when when the student list has reached a length of 5
+          or if current_grade_level has incremented past the max grade in our order dictionary.  
+    """
     student = []
     name = student_dict['Student Name'][0]
     del student_dict['Student Name'] 
@@ -110,13 +146,11 @@ def create_learning_path(order, student_dict):
         current_grade_level += 1
         if student_dict.get(current_grade_level) != None:
             domain_check = student_dict[current_grade_level] + domain_check
-        else:
-            domain_check = domain_check
     student.insert(0,name)
     return student[0:6]            
         
 
 def create_html_table(data):
     df_student = pd.DataFrame(data, columns= ["Names"] + [assign for assign in range(1,len(data[0]))])
-    html_table = df_student.to_html(classes=["table", "table-striped", "table-condensed"], index=False)        
+    html_table = df_student.to_html(classes=["table", "table-striped", "table-condensed","table-nonfluid"], index=False)        
     return html_table

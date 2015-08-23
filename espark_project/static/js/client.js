@@ -1,11 +1,10 @@
 $(document).ready(function(){
   var options = {  
     success: function(responseData) { 
-      $('.dataframe').css("width","auto")
       if(responseData.notCsv) {
         alert("Please make sure your file is a CSV")
       } else {
-        prepareTable(responseData)
+        $('#tablecontainer').html(responseData.myhtml)
       }
     },
     beforeSubmit: function(arr, $form, options){ 
