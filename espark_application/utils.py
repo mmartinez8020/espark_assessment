@@ -15,11 +15,12 @@ def create_domain_dict(domain_list):
     grades = {}
     for grade in domain_list:
         try:
-          key = int(grade[0])
+            key = int(grade[0])
         except: 
-          key = 0          
-        values = grade[1:len(grade)]
-        grades[key] = values
+            key = 0 
+        values = grade[1:len(grade)]        
+        removed_empty_strings = [domain for domain in values if domain]
+        grades[key] = removed_empty_strings
     return grades 
 
 def update_values(student_list):
@@ -44,9 +45,12 @@ def student_setup(students):
                 i = name
             d.setdefault(i,[]).append(j)
         dict_students.append(d) 
-    return dict_students  
+    return dict_students
 
-def real_function(order, student_dict):
+
+
+
+def create_learning_path(order, student_dict):
     student = []
     name = student_dict['Student Name'][0]
     del student_dict['Student Name'] 

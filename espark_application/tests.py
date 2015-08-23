@@ -46,6 +46,26 @@ class UtilityFunctionsTestCase(TestCase):
         #Check if all eligible items were converted to integers
         self.assertEqual(all(isinstance(item, int) for item in update_student_grades[3][1:]), True)
 
+    def test_student_setup(self):
+        student_results = [
+          ['Student Name', 'Domain1', 'Domain2', 'Domain3', 'Domain4'], 
+          ['Student 1', 2, 3, 0, 3], 
+          ['Student 2', 3, 1, 1, 1], 
+          ['Student 3', 0, 0, 1, 2], 
+          ['Student 4', 2, 4, 4, 4], 
+          ['Student 5', 2, 3, 0, 1], 
+          ['Student 6', 4, 2, 1, 1], 
+          ['Student 7', 5, 5, 0, 2], 
+          ['Student 8', 0, 0, 4, 5]
+        ]
+        list_of_students = student_setup(student_results)
+        #Check if output is a list
+        self.assertEqual(isinstance(list_of_students, list), True)
+        #Check if all items are dictionaries
+        self.assertEqual(all(isinstance(student_dictionary, dict) for student_dictionary in list_of_students), True)
+
+
+
         
 
         
