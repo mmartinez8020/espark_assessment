@@ -17,6 +17,7 @@ def create_list(csvFile):
         return "Not a csv"            
     return list_of_lists    
 
+
 def create_domain_dict(domain_list):
     """
     Returns a dictionary with grades as keys and lists as values that contain the grade's domain order
@@ -34,7 +35,6 @@ def create_domain_dict(domain_list):
     {0: ['BL', 'HM', 'RR'], 1: ['BL', 'HM', 'RR', 'L'], 2: ['R']}
     """
     grades = {}
-  
     for grade in domain_list:
         try:
             key = int(grade[0])
@@ -44,6 +44,7 @@ def create_domain_dict(domain_list):
         removed_empty_strings = [domain for domain in values if domain]
         grades[key] = removed_empty_strings
     return grades 
+
 
 def update_values(student_list):
     """
@@ -71,6 +72,7 @@ def update_values(student_list):
             elif item == "K":
                 student[index] = 0
     return student_list                               
+
 
 def student_setup(students):
     """
@@ -108,10 +110,8 @@ def student_setup(students):
             d.setdefault(i,[]).append(j)
         dict_students.append(d) 
     return dict_students
-
-
-
-
+    
+    
 def create_learning_path(order, student_dict):
     """
     Returns correct learning path given a student and a domain order.
@@ -155,10 +155,10 @@ def create_learning_path(order, student_dict):
 
 def create_html_table(data):
     """
-    Returns an html table with student lesson plans
+    Returns an html table with student lesson plans.
 
     This function leverages pandas to transform a list of lists to an html table.
     """
-    df_student = pd.DataFrame(data, columns= ["Names"] + [assign for assign in range(1,len(data[0]))])
+    df_student = pd.DataFrame(data, columns= ["Names"] + [assign for assign in range(1, len(data[0]))])
     html_table = df_student.to_html(classes=["table", "table-striped", "table-condensed","table-nonfluid"], index=False)        
     return html_table
