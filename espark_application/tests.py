@@ -33,7 +33,7 @@ class UtilityFunctionsTestCase(TestCase):
           ["1","BL","HM","RR","L"],["2","R"]
         ]
         domain_result = create_domain_dict(domain)
-        print domain_result
+        
         #Check if returns a dictionary
         self.assertEqual(isinstance(domain_result, dict), True)
         #Check if returns correcy key,value
@@ -49,6 +49,7 @@ class UtilityFunctionsTestCase(TestCase):
           ['Mark Martinez', 'K', 'K', 'K', '2']
         ]
         update_student_grades = update_values(student_grades)
+        print update_student_grades
         #Check is output is a list
         self.assertEqual(isinstance(update_student_grades, list), True)
         #Check if all eligible items were converted to integers

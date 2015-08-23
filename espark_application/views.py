@@ -15,8 +15,9 @@ def index(request):
     domain_order = create_list(domain_order)
     domain_order = create_domain_dict(domain_order)
     student_list = student_setup(update_values(student_test))
-    final = []
     print student_list
+    final = []
+    
     for student in student_list:
         student_order = create_learning_path(domain_order, student)
         final.append(student_order)

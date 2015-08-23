@@ -28,8 +28,9 @@ def create_domain_dict(domain_list):
     Example
     ----------
 
-    >>> domain = [["K", "BL","HM","RR"], ["1","BL","HM","RR","L"],["2","R"]]
+    domain = [["K", "BL", "HM", "RR"], ["1", "BL", "HM", "RR", "L"],["2", "R"]]
     
+    >>> create_domain_dict(domain)
     {0: ['BL', 'HM', 'RR'], 1: ['BL', 'HM', 'RR', 'L'], 2: ['R']}
     """
     grades = {}
@@ -50,6 +51,16 @@ def update_values(student_list):
 
     The function iterates through student lists and checks for grade levels and converts them to 
     integers.
+
+    student_grades = [
+          ['Student Name', 'RF', 'RL', 'RI', 'L'], 
+          ['Alex Trebek', '2', '3', 'K', '3'], 
+          ['Sinbad', '3', 'K', '3', '3'],
+          ['Mark Martinez', 'K', 'K', 'K', '2']
+        ]
+
+    >>> update_values(student_grades)
+    [['Student Name', 'RF', 'RL', 'RI', 'L'], ['Alex Trebek', 2, 3, 0, 3], ['Sinbad', 3, 0, 3, 3], ['Mark Martinez', 0, 0, 0, 2]]    
     """
     for student in student_list:
         for index, item in enumerate(student):
@@ -60,6 +71,11 @@ def update_values(student_list):
     return student_list                               
 
 def student_setup(students):
+    """
+    Returns list of dictionaries corresponding to each student. The key to each
+    dictionary corresponds to a grade level and the values are a list corresponding
+    to the students grade domain level.
+    """
     labels = students[0]
     del students[0]
     dict_students = []
