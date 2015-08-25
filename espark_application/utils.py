@@ -6,7 +6,7 @@ def create_list(csvFile):
     Returns a list of lists from a CSV file.
 
     The function iterates through the csv object and appends each row to a list.
-    If the csv_object is not iterable then a "Not a csv" string statement is returned.
+    If the csv_object is not iterable then a 'Not a csv' string statement is returned.
     """
     csv_object = csv.reader(csvFile)
     list_of_lists = []
@@ -14,7 +14,7 @@ def create_list(csvFile):
         for row in csv_object:
             list_of_lists.append(row)
     except:
-        return "Not a csv"            
+        return 'Not a csv'            
     return list_of_lists    
 
 
@@ -29,7 +29,7 @@ def create_domain_dict(domain_list):
     Example
     -------
 
-    domain = [["K", "BL", "HM", "RR"], ["1", "BL", "HM", "RR", "L"],["2", "R"]]
+    domain = [['K', 'BL', 'HM', 'RR'], ['1', 'BL', 'HM', 'RR', 'L'],['2', 'R']]
     
     >>> create_domain_dict(domain)
     {0: ['BL', 'HM', 'RR'], 1: ['BL', 'HM', 'RR', 'L'], 2: ['R']}
@@ -51,7 +51,7 @@ def update_values(student_list):
     Returns a new list where eligible strings have been converted to integers
 
     The function iterates through student lists and checks for grade levels and converts them to 
-    integers. "K" is converted to 0.
+    integers. 'K' is converted to 0.
 
     Example
     -------
@@ -69,7 +69,7 @@ def update_values(student_list):
         for index, item in enumerate(student):
             if item.isdigit():
                 student[index] = int(item)
-            elif item == "K":
+            elif item == 'K':
                 student[index] = 0
     return student_list                               
 
@@ -145,8 +145,8 @@ def create_learning_path(order, student_dict):
     while order.get(current_grade_level) != None and len(student) < 5:
         for domain in order[current_grade_level]:
             if domain in domain_check:
-                grade = "K" if current_grade_level == 0 else current_grade_level
-                student.append(str(grade) + "." + domain)
+                grade = 'K' if current_grade_level == 0 else current_grade_level
+                student.append(str(grade) + '.' + domain)
         current_grade_level += 1
         if student_dict.get(current_grade_level) != None:
             domain_check = student_dict[current_grade_level] + domain_check
@@ -160,6 +160,6 @@ def create_html_table(data):
 
     This function leverages pandas to transform a list of lists to an html table.
     """
-    df_student = pd.DataFrame(data, columns= ["Names"] + [assign for assign in range(1, len(data[0]))])
-    html_table = df_student.to_html(classes=["table", "table-striped", "table-condensed","table-nonfluid"], index=False)        
+    df_student = pd.DataFrame(data, columns= ['Names'] + [assign for assign in range(1, len(data[0]))])
+    html_table = df_student.to_html(classes=['table', 'table-striped', 'table-condensed','table-nonfluid'], index=False)        
     return html_table
