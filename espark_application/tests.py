@@ -30,7 +30,8 @@ class UtilityFunctionsTestCase(TestCase):
     def test_create_domain_dict(self):
         domain = [
           ["K", "BL","HM","RR"], 
-          ["1","BL","HM","RR","L"],["2","R"]
+          ["1","BL","HM","RR","L"],
+          ["2","R"]
         ]
         domain_result = create_domain_dict(domain)
         
